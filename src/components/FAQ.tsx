@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { FadeUp, RevealWords } from "@/components/animations/Reveal";
 
-const FAQS = [
+const FAQS: { question: string; answer: ReactNode }[] = [
   {
     question: "¿Cómo inicio la búsqueda de una propiedad con Diez Brokers?",
     answer: "Es muy sencillo. Puedes explorar nuestro catálogo online filtrando por ubicación y presupuesto, o bien hacer una solicitud directa a través de nuestro formulario de contacto o WhatsApp. Te asignaremos un asesor experto que te acompañará de inicio a fin.",
@@ -13,6 +14,20 @@ const FAQS = [
   {
     question: "¿Qué servicios ofrece Diez Brokers para compradores primerizos?",
     answer: "Ofrecemos asesoría completa paso a paso: desde el análisis de tu presupuesto, pre-calificación para créditos hipotecarios bancarios o Infonavit, búsqueda de opciones ideales, visitas guiadas, negociación de precios y todo el trámite notarial.",
+  },
+  {
+    question: "¿Puedo simular mi crédito hipotecario antes de comprar?",
+    answer: (
+      <>
+        Sí. En nuestro{" "}
+        <Link href="/simulador" className="text-primary font-semibold hover:underline">
+          simulador hipotecario
+        </Link>{" "}
+        puedes estimar enganche, monto del crédito y mensualidad comparando
+        escenarios del 10% y 30%. También puedes simular desde la ficha de
+        cualquier propiedad en venta.
+      </>
+    ),
   },
   {
     question: "¿Puede Diez Brokers ayudarme a vender mi propiedad?",

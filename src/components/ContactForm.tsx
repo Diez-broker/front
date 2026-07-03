@@ -9,28 +9,41 @@ interface ContactFormProps {
   propertyTitle?: string;
   propertyId?: string;
   compact?: boolean;
+  initialMessage?: string;
+  initialSubject?: string;
+}
+
+function buildDefaultMessage(
+  propertyTitle?: string,
+  propertyId?: string
+): string {
+  if (!propertyTitle) return "";
+  return `Estoy interesado en la propiedad "${propertyTitle}" (${propertyId}). Me gustaría más información.`;
 }
 
 export function ContactForm({
   propertyTitle,
   propertyId,
   compact = false,
+  initialMessage,
+  initialSubject,
 }: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-    message: propertyTitle
-      ? `Estoy interesado en la propiedad "${propertyTitle}" (${propertyId}). Me gustaría más información.`
-      : "",
+    message:
+      initialMessage ?? buildDefaultMessage(propertyTitle, propertyId),
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = propertyTitle
-      ? `Interés en propiedad: ${propertyTitle} (${propertyId})`
-      : "Contacto desde el sitio web";
+    const subject =
+      initialSubject ??
+      (propertyTitle
+        ? `Interés en propiedad: ${propertyTitle} (${propertyId})`
+        : "Contacto desde el sitio web");
     const body = `Nombre: ${form.name}
 Email: ${form.email}
 Teléfono: ${form.phone}

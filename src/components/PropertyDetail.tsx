@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { PropertyForList } from "@/types/easybroker";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -21,6 +21,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { COMPANY } from "@/data/properties";
 import { ContactForm } from "./ContactForm";
+import { MortgageCalculator } from "./MortgageCalculator";
 import { cn } from "@/lib/utils";
 import { FadeUp, ZoomReveal } from "@/components/animations/Reveal";
 
@@ -319,6 +320,26 @@ export function PropertyDetail({ property }: PropertyDetailProps) {
                 </p>
               </FadeUp>
             )}
+
+            {!isRental && operation?.amount ? (
+              <FadeUp className="bg-white rounded-2xl border border-neutral-light p-6 md:p-8 mb-6">
+                <Suspense
+                  fallback={
+                    <div className="h-40 bg-neutral-light/30 rounded-xl animate-pulse" />
+                  }
+                >
+                  <MortgageCalculator
+                    compact
+                    initialPropertyValue={operation.amount}
+                    initialState={property.state}
+                    propertyTitle={property.title}
+                    propertyId={property.public_id}
+                    showHeader
+                    showAmortization={false}
+                  />
+                </Suspense>
+              </FadeUp>
+            ) : null}
 
             <FadeUp className="bg-primary-dark rounded-2xl p-6 md:p-8 text-white">
               <h2 className="text-xl font-heading font-bold mb-2">

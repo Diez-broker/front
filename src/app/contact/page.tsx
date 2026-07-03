@@ -1,5 +1,6 @@
+import { Suspense } from "react";
 import { COMPANY } from "@/data/properties";
-import { ContactForm } from "@/components/ContactForm";
+import { ContactFormWithQuery } from "@/components/ContactFormWithQuery";
 import { Phone, Mail, MapPin, MessageCircle, Clock } from "lucide-react";
 import { FAQ } from "@/components/FAQ";
 import { FadeUp, RevealWords, Stagger, StaggerItem, ZoomReveal } from "@/components/animations/Reveal";
@@ -162,7 +163,13 @@ export default function ContactPage() {
             {/* Right side: Contact Form */}
             <aside className="lg:col-span-5 lg:sticky lg:top-28">
               <FadeUp delay={0.2} className="bg-white rounded-3xl p-2 shadow-xl border border-neutral-light/40">
-                <ContactForm />
+                <Suspense
+                  fallback={
+                    <div className="h-64 bg-neutral-light/30 rounded-2xl animate-pulse m-4" />
+                  }
+                >
+                  <ContactFormWithQuery />
+                </Suspense>
               </FadeUp>
             </aside>
 

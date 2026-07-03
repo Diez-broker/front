@@ -133,6 +133,17 @@ export function Navbar() {
           </Link>
 
           <Link
+            href="/simulador"
+            className={cn(
+              "text-sm font-medium tracking-wide hover:opacity-75 transition-opacity relative py-1",
+              transparent ? "text-white" : "text-foreground",
+              pathname === "/simulador" && "font-semibold border-b-2 border-primary"
+            )}
+          >
+            Simulador
+          </Link>
+
+          <Link
             href="/contact"
             className={cn(
               "text-sm font-medium tracking-wide hover:opacity-75 transition-opacity relative py-1",
@@ -246,6 +257,16 @@ export function Navbar() {
             onClick={closeMobile}
           >
             Propietarios
+          </Link>
+          <Link
+            href="/simulador"
+            className={cn(
+              "text-foreground font-medium text-lg border-b border-neutral-light pb-2",
+              pathname === "/simulador" && "text-primary font-bold"
+            )}
+            onClick={closeMobile}
+          >
+            Simulador
           </Link>
           <Link
             href="/contact"
